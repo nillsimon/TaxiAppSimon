@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class PassengerActivity extends AppCompatActivity {
+public class PassengerActivity extends AppCompatActivity  {
 
     private static final String TAG = "DriverSignInActivity";
 
@@ -27,7 +28,7 @@ public class PassengerActivity extends AppCompatActivity {
     private TextInputLayout textInputConfirmPassword;
 
     private Button loginSignUpButton;
-    private Button toggleLoginSignUpTextView;
+    private TextView toggleLoginSignUpTextView;
 
     private boolean isLoginModeActive;
 
@@ -45,8 +46,10 @@ public class PassengerActivity extends AppCompatActivity {
         textInputPassword = findViewById(R.id.textInputPassword);
         textInputConfirmPassword = findViewById(R.id.textInputConfirmPassword);
 
+
         loginSignUpButton = findViewById(R.id.loginSignUpButton);
         textInputConfirmPassword = findViewById(R.id.textInputConfirmPassword);
+        toggleLoginSignUpTextView = findViewById(R.id.toggleLoginSignUpTextView);
         authBar = findViewById(R.id.authBar);
         auth = FirebaseAuth.getInstance();
 
@@ -181,8 +184,7 @@ public class PassengerActivity extends AppCompatActivity {
     }
 
 
-    /*public void toggleLoginSignUpPassenger(View view) {
-
+    public void toggleLoginSignUpPassenger(View view) {
         if (isLoginModeActive) {
             isLoginModeActive = false;
             loginSignUpButton.setText("Sign Up");
@@ -194,8 +196,7 @@ public class PassengerActivity extends AppCompatActivity {
             toggleLoginSignUpTextView.setText("Or, sign up");
             textInputConfirmPassword.setVisibility(View.GONE);
         }
-
 }
-    */
+
 
 }

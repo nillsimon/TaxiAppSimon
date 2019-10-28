@@ -7,7 +7,8 @@
     tools:context=".ChooseModeActivity">
 
     <ImageView
-         android:scaleType="centerCrop"
+        android:src="@drawable/taxi2"
+        android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -30,7 +31,6 @@
 
         <Button
             android:id="@+id/passengerButton"
-            android:onClick="goToPassengerSignIn"
             android:text="I'm a passenger"
             android:textSize="20sp"
             android:textColor="@color/colorAccent"
@@ -41,7 +41,6 @@
 
         <Button
             android:id="@+id/driverButton"
-            android:onClick="goToDriverSignIn"
             android:text="I'm a driver"
             android:textSize="20sp"
             android:textColor="@color/colorPrimary"
