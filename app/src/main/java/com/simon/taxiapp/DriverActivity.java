@@ -78,7 +78,7 @@ public class DriverActivity extends AppCompatActivity {
         }
     }
 
-       private boolean validatePassword(){
+    private boolean validatePassword(){
         String passwordInput = textInputPassword.getEditText().getText().toString().trim();
         if (passwordInput.isEmpty()) {
             textInputPassword.setError("Введите адрес электронной почты");
@@ -98,21 +98,21 @@ public class DriverActivity extends AppCompatActivity {
         String passwordInput = textInputPassword.getEditText().getText().toString().trim();
         String confirmPasswordInput = textInputConfirmPassword.getEditText().getText().toString().trim();
 
-           if (!passwordInput.equals(confirmPasswordInput)) {
-               textInputPassword.setError("Пароль не совпвдают");
-               return false;
-           }else {
-               textInputPassword.setError("");
-               return true;
-           }
+        if (!passwordInput.equals(confirmPasswordInput)) {
+            textInputPassword.setError("Пароль не совпвдают");
+            return false;
+        }else {
+            textInputPassword.setError("");
+            return true;
+        }
     }
 
     public void loginSignUpUser(View view) {
         authBar.setVisibility(ProgressBar.VISIBLE);
 
         if(!validateEmail() || !validateName() || !validatePassword()){
-         return;
-      }
+            return;
+        }
         if(isLoginModeActive){
             auth.signInWithEmailAndPassword(
                     textInputEmail.getEditText().getText().toString().trim(),
@@ -137,7 +137,7 @@ public class DriverActivity extends AppCompatActivity {
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
                                 Toast.makeText(DriverActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
-                               // updateUI(null);
+                                // updateUI(null);
                             }
 
                             // ...
