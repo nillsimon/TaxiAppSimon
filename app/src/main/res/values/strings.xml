@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">TaxiApp</string>
+    <string name="taxi_app">Taxi App</string>
+    <string name="i_m_a_driver">Для Водтителей</string>
+    <string name="i_m_a_passenger">Для пассажиров</string>
+    <string name="todo">TODO</string>
+    <string name="address">Адрес</string>
+    <string name="name">Имя</string>
+    <string name="password">Пароль</string>
+    <string name="confirm_password">Повтор пароля</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="tap_to_log_in">Tap To Log In</string>
 </resources>
