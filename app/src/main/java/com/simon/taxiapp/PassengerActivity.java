@@ -18,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class PassengerActivity extends AppCompatActivity  {
+public class PassengerActivity extends AppCompatActivity  implements View.OnClickListener{
 
     private static final String TAG = "DriverSignInActivity";
 
@@ -52,6 +52,7 @@ public class PassengerActivity extends AppCompatActivity  {
         toggleLoginSignUpTextView = findViewById(R.id.toggleLoginSignUpTextView);
         authBar = findViewById(R.id.authBar);
         auth = FirebaseAuth.getInstance();
+        loginSignUpButton.setOnClickListener(this);
 
     }
 
@@ -109,13 +110,29 @@ public class PassengerActivity extends AppCompatActivity  {
         }
     }
 
-    public void loginSignUpUser(View view) {
+    public void toggleLoginSignUpPassenger(View view) {
+        if (isLoginModeActive) {
+            isLoginModeActive = false;
+            loginSignUpButton.setText("Sign Up");
+            toggleLoginSignUpTextView.setText("Or, log in");
+            textInputConfirmPassword.setVisibility(View.VISIBLE);
+        } else {
+            isLoginModeActive = true;
+            loginSignUpButton.setText("Log In");
+            toggleLoginSignUpTextView.setText("Or, sign up");
+            textInputConfirmPassword.setVisibility(View.GONE);
+        }
+}
+
+
+    @Override
+    public void onClick(View v) {
         authBar.setVisibility(ProgressBar.VISIBLE);
 
-        if (!validateEmail() || !validateName() || !validatePassword()) {
+        if(!validateEmail() || !validateName() || !validatePassword()){
             return;
         }
-        if (isLoginModeActive) {
+        if(isLoginModeActive){
             auth.signInWithEmailAndPassword(
                     textInputEmail.getEditText().getText().toString().trim(),
                     textInputPassword.getEditText().getText().toString().trim())
@@ -127,9 +144,9 @@ public class PassengerActivity extends AppCompatActivity  {
                                 Log.d(TAG, "signInUserWithEmail:success");
                                 authBar.setVisibility(ProgressBar.INVISIBLE);
 
-                                Toast.makeText(PassengerActivity.this, "Вы успешно вошли " + "\n" + "с адресом: "
-                                        + textInputEmail.getEditText().getText().toString().trim() + "\n" + "c именем: "
-                                        + textInputName.getEditText().getText().toString().trim() + "\n" + "и паролем: "
+                                Toast.makeText(PassengerActivity.this,"Вы успешно вошли "+"\n" + "с адресом: "
+                                        + textInputEmail.getEditText().getText().toString().trim()  + "\n" +"c именем: "
+                                        + textInputName.getEditText().getText().toString().trim() + "\n"+"и паролем: "
                                         + textInputPassword.getEditText().getText().toString().trim(), Toast.LENGTH_LONG).show();
 
                                 FirebaseUser user = auth.getCurrentUser();
@@ -145,8 +162,8 @@ public class PassengerActivity extends AppCompatActivity  {
                             // ...
                         }
                     });
-        } else {
-            if (!validateEmail() | !validateName() | !validatePassword() | !validateConfirmPassword()) {
+        }else {
+            if(!validateEmail() | !validateName() | !validatePassword() | !validateConfirmPassword()){
                 return;
             }
             auth.createUserWithEmailAndPassword(
@@ -161,9 +178,9 @@ public class PassengerActivity extends AppCompatActivity  {
                                 Log.d(TAG, "createUserWithEmail:success");
                                 authBar.setVisibility(ProgressBar.INVISIBLE);
 
-                                Toast.makeText(PassengerActivity.this, "Вы успешно зарегистрированы " + "\n" + "с адресом: "
-                                        + textInputEmail.getEditText().getText().toString().trim() + "\n" + "c именем: "
-                                        + textInputName.getEditText().getText().toString().trim() + "\n" + "и паролем: "
+                                Toast.makeText(PassengerActivity.this,"Вы успешно зарегистрированы "+"\n" + "с адресом: "
+                                        + textInputEmail.getEditText().getText().toString().trim()  + "\n" +"c именем: "
+                                        + textInputName.getEditText().getText().toString().trim() + "\n"+"и паролем: "
                                         + textInputPassword.getEditText().getText().toString().trim(), Toast.LENGTH_LONG).show();
 
                                 FirebaseUser user = auth.getCurrentUser();
@@ -182,21 +199,4 @@ public class PassengerActivity extends AppCompatActivity  {
                     });
         }
     }
-
-
-    public void toggleLoginSignUpPassenger(View view) {
-        if (isLoginModeActive) {
-            isLoginModeActive = false;
-            loginSignUpButton.setText("Sign Up");
-            toggleLoginSignUpTextView.setText("Or, log in");
-            textInputConfirmPassword.setVisibility(View.VISIBLE);
-        } else {
-            isLoginModeActive = true;
-            loginSignUpButton.setText("Log In");
-            toggleLoginSignUpTextView.setText("Or, sign up");
-            textInputConfirmPassword.setVisibility(View.GONE);
-        }
-}
-
-
 }

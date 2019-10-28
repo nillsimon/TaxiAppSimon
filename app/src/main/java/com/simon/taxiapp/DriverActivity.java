@@ -18,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class DriverActivity extends AppCompatActivity {
+public class DriverActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "DriverSignInActivity";
 
@@ -51,6 +51,7 @@ public class DriverActivity extends AppCompatActivity {
         toggleLoginSignUpTextView = findViewById(R.id.toggleLoginSignUpTextView);
 
         auth = FirebaseAuth.getInstance();
+        loginSignUpButton.setOnClickListener(this);
 
     }
 
@@ -107,79 +108,7 @@ public class DriverActivity extends AppCompatActivity {
         }
     }
 
-    public void loginSignUpUser(View view) {
-        authBar.setVisibility(ProgressBar.VISIBLE);
 
-        if(!validateEmail() || !validateName() || !validatePassword()){
-            return;
-        }
-        if(isLoginModeActive){
-            auth.signInWithEmailAndPassword(
-                    textInputEmail.getEditText().getText().toString().trim(),
-                    textInputPassword.getEditText().getText().toString().trim())
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "signInUserWithEmail:success");
-                                authBar.setVisibility(ProgressBar.INVISIBLE);
-
-                                Toast.makeText(DriverActivity.this,"Вы успешно вошли "+"\n" + "с адресом: "
-                                        + textInputEmail.getEditText().getText().toString().trim()  + "\n" +"c именем: "
-                                        + textInputName.getEditText().getText().toString().trim() + "\n"+"и паролем: "
-                                        + textInputPassword.getEditText().getText().toString().trim(), Toast.LENGTH_LONG).show();
-
-                                FirebaseUser user = auth.getCurrentUser();
-                                //updateUI(user);
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(DriverActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                                // updateUI(null);
-                            }
-
-                            // ...
-                        }
-                    });
-        }else {
-            if(!validateEmail() | !validateName() | !validatePassword() | !validateConfirmPassword()){
-                return;
-            }
-            auth.createUserWithEmailAndPassword(
-
-                    textInputEmail.getEditText().getText().toString().trim(),
-                    textInputPassword.getEditText().getText().toString().trim())
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "createUserWithEmail:success");
-                                authBar.setVisibility(ProgressBar.INVISIBLE);
-
-                                Toast.makeText(DriverActivity.this,"Вы успешно зарегистрированы "+"\n" + "с адресом: "
-                                        + textInputEmail.getEditText().getText().toString().trim()  + "\n" +"c именем: "
-                                        + textInputName.getEditText().getText().toString().trim() + "\n"+"и паролем: "
-                                        + textInputPassword.getEditText().getText().toString().trim(), Toast.LENGTH_LONG).show();
-
-                                FirebaseUser user = auth.getCurrentUser();
-                                // updateUI(user);
-                            } else {
-                                authBar.setVisibility(ProgressBar.INVISIBLE);
-                                // If sign in fails, display a message to the user.
-                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(DriverActivity.this, "Такой пользователь уже зарегистрирован",
-                                        Toast.LENGTH_SHORT).show();
-                                // updateUI(null);
-                            }
-
-                            // ...
-                        }
-                    });
-        }
-    }
 
     public void toggleLoginSignUp(View view) {
 
@@ -195,4 +124,81 @@ public class DriverActivity extends AppCompatActivity {
             textInputConfirmPassword.setVisibility(View.GONE);
         }
     }
-}
+
+    @Override
+    public void onClick(View view) {
+
+            authBar.setVisibility(ProgressBar.VISIBLE);
+
+            if(!validateEmail() || !validateName() || !validatePassword()){
+                return;
+            }
+            if(isLoginModeActive){
+                auth.signInWithEmailAndPassword(
+                        textInputEmail.getEditText().getText().toString().trim(),
+                        textInputPassword.getEditText().getText().toString().trim())
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "signInUserWithEmail:success");
+                                    authBar.setVisibility(ProgressBar.INVISIBLE);
+
+                                    Toast.makeText(DriverActivity.this,"Вы успешно вошли "+"\n" + "с адресом: "
+                                            + textInputEmail.getEditText().getText().toString().trim()  + "\n" +"c именем: "
+                                            + textInputName.getEditText().getText().toString().trim() + "\n"+"и паролем: "
+                                            + textInputPassword.getEditText().getText().toString().trim(), Toast.LENGTH_LONG).show();
+
+                                    FirebaseUser user = auth.getCurrentUser();
+                                    //updateUI(user);
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                    Toast.makeText(DriverActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                    // updateUI(null);
+                                }
+
+                                // ...
+                            }
+                        });
+            }else {
+                if(!validateEmail() | !validateName() | !validatePassword() | !validateConfirmPassword()){
+                    return;
+                }
+                auth.createUserWithEmailAndPassword(
+
+                        textInputEmail.getEditText().getText().toString().trim(),
+                        textInputPassword.getEditText().getText().toString().trim())
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "createUserWithEmail:success");
+                                    authBar.setVisibility(ProgressBar.INVISIBLE);
+
+                                    Toast.makeText(DriverActivity.this,"Вы успешно зарегистрированы "+"\n" + "с адресом: "
+                                            + textInputEmail.getEditText().getText().toString().trim()  + "\n" +"c именем: "
+                                            + textInputName.getEditText().getText().toString().trim() + "\n"+"и паролем: "
+                                            + textInputPassword.getEditText().getText().toString().trim(), Toast.LENGTH_LONG).show();
+
+                                    FirebaseUser user = auth.getCurrentUser();
+                                    // updateUI(user);
+                                } else {
+                                    authBar.setVisibility(ProgressBar.INVISIBLE);
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                    Toast.makeText(DriverActivity.this, "Такой пользователь уже зарегистрирован",
+                                            Toast.LENGTH_SHORT).show();
+                                    // updateUI(null);
+                                }
+
+                                // ...
+                            }
+                        });
+            }
+        }
+
+    }

@@ -89,7 +89,6 @@
     <Button
         android:id="@+id/loginSignUpButton"
         android:text="@string/sign_up"
-        android:onClick="loginSignUpUser"
         android:background="@color/colorAccent"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
