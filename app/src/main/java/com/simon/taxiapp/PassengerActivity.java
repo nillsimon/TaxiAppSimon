@@ -39,7 +39,7 @@ public class PassengerActivity extends AppCompatActivity  implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_passenger);
+        setContentView(R.layout.activity_maneger);
 
         textInputEmail = findViewById(R.id.textInputEmail);
         textInputName = findViewById(R.id.textInputName);

@@ -15,7 +15,7 @@ public class ChooseModeActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_mode);
+        setContentView(R.layout.activity_choose);
 
         passengerButton = findViewById(R.id.passengerButton);
         driverButton = findViewById(R.id.driverButton);

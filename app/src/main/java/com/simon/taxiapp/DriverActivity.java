@@ -3,6 +3,7 @@ package com.simon.taxiapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,7 +39,7 @@ public class DriverActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver);
+        setContentView(R.layout.activity_sealer);
 
         textInputEmail = findViewById(R.id.textInputEmail);
         textInputName = findViewById(R.id.textInputName);
@@ -143,6 +144,7 @@ public class DriverActivity extends AppCompatActivity implements View.OnClickLis
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "signInUserWithEmail:success");
+                                    startActivity(new Intent(DriverActivity.this, DriverMapsActivity.class));
                                     authBar.setVisibility(ProgressBar.INVISIBLE);
 
                                     Toast.makeText(DriverActivity.this,"Вы успешно вошли "+"\n" + "с адресом: "
@@ -178,6 +180,7 @@ public class DriverActivity extends AppCompatActivity implements View.OnClickLis
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "createUserWithEmail:success");
                                     authBar.setVisibility(ProgressBar.INVISIBLE);
+                                    startActivity(new Intent(DriverActivity.this, DriverMapsActivity.class));
 
                                     Toast.makeText(DriverActivity.this,"Вы успешно зарегистрированы "+"\n" + "с адресом: "
                                             + textInputEmail.getEditText().getText().toString().trim()  + "\n" +"c именем: "

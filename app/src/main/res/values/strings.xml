@@ -10,4 +10,5 @@
     <string name="confirm_password">Повтор пароля</string>
     <string name="sign_up">Sign Up</string>
     <string name="tap_to_log_in">Tap To Log In</string>
+    <string name="title_activity_driver_maps">Map</string>
 </resources>
